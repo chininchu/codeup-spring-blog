@@ -9,18 +9,29 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @Controller
 public class PostController {
 
-    @GetMapping("/posts")
+    @GetMapping("/index")
 
-    public String postsIndex() {
+    public String postsIndex(Model model) {
 
 //        return "<p>" + "posts index page" + "</p>";
 
+        ArrayList<Post> posts = new ArrayList<>();
 
+        Post post1 = new Post(1, "If you tell: A true story", "New");
+        Post post2 = new Post(2, "Maybe in another life", "Old");
+
+        posts.add(post1);
+        posts.add(post2);
+
+        model.addAttribute("posts", posts);
+
+        return "posts/index";
 
 
     }

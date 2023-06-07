@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="partials/partials :: bootstrap-link">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 
+<div th:include="partials/partials :: my-partial"></div>
+
+
+<div th:each="data: ${posts}">
+
+    <p th:hidden="${data.id}"></p>
+    <p th:text="'Title:' + ' ' +  ${data.title}"></p>
+    <p th:text=" 'Body:' + ' ' +  ${data.body}"></p>
+</div>
+
+<script th:include="partials/partials :: bootstrap-js"></script>
 </body>
 </html>

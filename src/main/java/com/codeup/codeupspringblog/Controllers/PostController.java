@@ -1,7 +1,9 @@
 package com.codeup.codeupspringblog.Controllers;
 
 
+import com.codeup.codeupspringblog.Models.Post;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,23 +15,31 @@ import java.util.Arrays;
 public class PostController {
 
     @GetMapping("/posts")
-    @ResponseBody
 
     public String postsIndex() {
 
-        return "<p>" + "posts index page" + "</p>";
+//        return "<p>" + "posts index page" + "</p>";
+
+
 
 
     }
 
 
     @GetMapping("/posts/{id}")
-    @ResponseBody
 
 
-    public String individualPost(@PathVariable long id) {
+    public String individualPost(@PathVariable long id, Model model) {
 
-        return "<p>" + "view an individual post" + " " + Long.toString(id) + "</p>";
+        Post post = new Post(id, "New-Car", "For more information call 1800-827-1000");
+
+
+        model.addAttribute("post", post);
+
+        return "posts/show";
+
+
+//        return "<p>" + "view an individual post" + " " + Long.toString(id) + "</p>";
 
 
     }

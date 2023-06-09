@@ -8,9 +8,11 @@
 </head>
 <body>
 
-<p th:text="${post.title}"></p>
-<p th:text="${post.body}"></p>
-<p th:text="${post.user.email}"></p>
+<p th:text="'Title: ' + ${post.title}"></p>
+<p th:text="'Body: ' + ${post.body}"></p>
+<p th:text="'Email: ' + ${post.user.email}"></p>
+<a th:href="@{/posts/${post.id}/edit}">Edit Post</a>
+
 
 </body>
 </html>

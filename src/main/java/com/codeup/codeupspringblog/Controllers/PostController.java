@@ -70,6 +70,9 @@ public class PostController {
 
     public String formPost() {
 
+
+
+
 //        return "<p>" + "view the form for creating a post" + "</p>";
 
         return "/posts/create";

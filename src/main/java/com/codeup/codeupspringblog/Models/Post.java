@@ -42,5 +42,10 @@ public class Post {
     }
 
 
+    // post-user relationship
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
 }

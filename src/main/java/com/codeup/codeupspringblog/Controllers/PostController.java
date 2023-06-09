@@ -3,6 +3,7 @@ package com.codeup.codeupspringblog.Controllers;
 
 import com.codeup.codeupspringblog.Models.Post;
 import com.codeup.codeupspringblog.Repository.PostRepository;
+import com.codeup.codeupspringblog.Repository.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +15,14 @@ import java.util.Arrays;
 public class PostController {
 
     private final PostRepository postsDao;
+    private final UserRepository userDao;
 
 
-    public PostController(PostRepository postsDao) {
+
+    public PostController(PostRepository postsDao, UserRepository userDao) {
 
         this.postsDao = postsDao;
+        this.userDao = userDao;
 
 
     }
@@ -51,7 +55,7 @@ public class PostController {
 
     public String individualPost(@PathVariable long id, Model model) {
 
-        Post post = new Post(id, "New-Car", "For more information call 1800-827-1000");
+        Post post = new Post();
 
 
         model.addAttribute("post", post);
@@ -69,8 +73,6 @@ public class PostController {
 
 
     public String formPost() {
-
-
 
 
 //        return "<p>" + "view the form for creating a post" + "</p>";

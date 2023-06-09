@@ -8,9 +8,9 @@
 </head>
 <body>
 
-<p th:hidden="${post.id}"></p>
 <p th:text="${post.title}"></p>
 <p th:text="${post.body}"></p>
+<p th:text="${post.user.email}"></p>
 
 </body>
 </html>

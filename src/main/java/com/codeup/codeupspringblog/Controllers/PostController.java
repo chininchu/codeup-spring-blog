@@ -18,7 +18,6 @@ public class PostController {
     private final UserRepository userDao;
 
 
-
     public PostController(PostRepository postsDao, UserRepository userDao) {
 
         this.postsDao = postsDao;
@@ -55,15 +54,14 @@ public class PostController {
 
     public String individualPost(@PathVariable long id, Model model) {
 
-        Post post = new Post();
 
+        model.addAttribute("post", postsDao.findById(id).get());
 
-        model.addAttribute("post", post);
 
         return "posts/show";
 
 
-//        return "<p>" + "view an individual post" + " " + Long.toString(id) + "</p>";
+
 
 
     }

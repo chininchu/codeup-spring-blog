@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.management.ConstructorParameters;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -41,8 +43,14 @@ public class Post {
 
     }
 
+    public Post(String title, String body, User user) {
+        this.title = title;
+        this.body = body;
+        this.user = user;
+    }
 
     // post-user relationship
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

@@ -31,15 +31,7 @@ public class PostController {
 
     public String postsIndex(Model model) {
 
-//        return "<p>" + "posts index page" + "</p>";
 
-//        ArrayList<Post> posts = new ArrayList<>();
-//
-//        Post post1 = new Post("Car", "New-Car");
-//        Post post2 = new Post("Bicycle", "New-Bicycle");
-//
-//        posts.add(post1);
-//        posts.add(post2);
         model.addAttribute("posts", postsDao.findAll());
 
 
@@ -61,19 +53,16 @@ public class PostController {
         return "posts/show";
 
 
-
-
-
     }
 
 
     @GetMapping("/posts/create")
 
 
-    public String formPost() {
+    public String formPost(Model model) {
 
+        model.addAttribute("post", new Post());
 
-//        return "<p>" + "view the form for creating a post" + "</p>";
 
         return "/posts/create";
 
@@ -82,17 +71,12 @@ public class PostController {
 
 
     @PostMapping("/posts/create")
-//    @ResponseBody
 
 
-    public String newPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, Model model) {
+    public String newPost(@ModelAttribute Post post) {
 
-        Post post = new Post(title, body);
         postsDao.save(post);
         return "redirect:/index";
-
-
-//        return "<p>" + "create a new post" + "</p>";
 
 
     }

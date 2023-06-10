@@ -4,6 +4,7 @@ package com.codeup.codeupspringblog.Controllers;
 import com.codeup.codeupspringblog.Models.Post;
 import com.codeup.codeupspringblog.Repository.PostRepository;
 import com.codeup.codeupspringblog.Repository.UserRepository;
+import com.codeup.codeupspringblog.Services.EmailService;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +19,17 @@ public class PostController {
     private final PostRepository postsDao;
     private final UserRepository userDao;
 
+    private final EmailService emailService;
 
 
 
-    public PostController(PostRepository postsDao, UserRepository userDao) {
+
+    public PostController(PostRepository postsDao, UserRepository userDao, EmailService emailService) {
 
         this.postsDao = postsDao;
         this.userDao = userDao;
+        this.emailService = emailService;
+
 
 
     }
@@ -79,6 +84,8 @@ public class PostController {
     public String newPost(@ModelAttribute Post post) {
         post.setUser(userDao.findById(1L).get());
         postsDao.save(post);
+
+
         return "redirect:/index";
 
 

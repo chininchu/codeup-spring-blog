@@ -4,6 +4,7 @@ package com.codeup.codeupspringblog.Controllers;
 import com.codeup.codeupspringblog.Models.Post;
 import com.codeup.codeupspringblog.Repository.PostRepository;
 import com.codeup.codeupspringblog.Repository.UserRepository;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,8 @@ public class PostController {
 
     private final PostRepository postsDao;
     private final UserRepository userDao;
+
+
 
 
     public PostController(PostRepository postsDao, UserRepository userDao) {
@@ -74,12 +77,52 @@ public class PostController {
 
 
     public String newPost(@ModelAttribute Post post) {
-
+        post.setUser(userDao.findById(1L).get());
         postsDao.save(post);
         return "redirect:/index";
 
 
     }
+
+
+    @GetMapping("/posts/{id}/edit")
+
+    public String editPost(Model model, @PathVariable long id) {
+
+        model.addAttribute("post", postsDao.findById(id).get());
+
+        // The return keyword in this case returns the filepath of the HTML file
+
+        return "posts/edit";
+
+
+    }
+
+
+    @PostMapping("/posts/{id}/edit")
+
+    public String submitEditPost(@ModelAttribute Post post){
+
+        post.setUser(userDao.findById(1L).get());
+        postsDao.save(post);
+
+        // The keyword redirect means that it will render a page based on a @Getmapping
+
+        // If the return value is in a form of a String then it will render the template based on the file path
+
+        return "redirect:/index";
+
+
+
+
+
+
+
+
+
+    }
+
+
 
 
 }

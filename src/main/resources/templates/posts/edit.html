@@ -6,8 +6,9 @@
 </head>
 <body>
 
+<!--When a field is dynamic (i.e. Id) within a file path we will need to use this particular syntax-->
 
-<form th:action="@{/posts/${post.id}/edit}" th:method="get" th:object="${post}">
+<form th:action="@{/posts/{id}/edit (id = ${post.id})}" th:method="post" th:object="${post}">
 
 
     Title:
@@ -16,7 +17,7 @@
     Description:
 
 
-    <input id="body" th:field="*{body}"></input>
+    <input type="text" id="body" th:field="*{body}"/>
 
     <input type="submit" value="Save"/>
 </form>

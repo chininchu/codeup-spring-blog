@@ -24,7 +24,7 @@ public class EmailService {
         msg.setFrom(from);
         msg.setTo(post.getUser().getEmail());
         msg.setSubject(subject);
-        msg.setText(body);
+        msg.setText(body + post.getBody());
 
 
         try {

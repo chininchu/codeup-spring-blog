@@ -7,15 +7,15 @@
 <body>
 
 
-<form method="post" action="/posts/create">
+<form th:object="${post}" th:method="post" th:action="@{/posts/create}">
     <label for="title">Title:</label>
     <br>
-    <input type="text" id="title" name="title">
+    <input type="text" id="title" th:field="*{title}">
     <br>
 
     <label for="body">Body:</label>
     <br>
-    <textarea id="body" name="body"></textarea>
+    <textarea id="body" th:field="*{body}"></textarea>
     <br>
 
     <input type="submit" value="Submit">

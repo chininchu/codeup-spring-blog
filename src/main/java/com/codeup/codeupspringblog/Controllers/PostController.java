@@ -2,6 +2,7 @@ package com.codeup.codeupspringblog.Controllers;
 
 
 import com.codeup.codeupspringblog.Models.Post;
+import com.codeup.codeupspringblog.Models.User;
 import com.codeup.codeupspringblog.Repository.PostRepository;
 import com.codeup.codeupspringblog.Repository.UserRepository;
 import com.codeup.codeupspringblog.Services.EmailService;
@@ -22,14 +23,11 @@ public class PostController {
     private final EmailService emailService;
 
 
-
-
     public PostController(PostRepository postsDao, UserRepository userDao, EmailService emailService) {
 
         this.postsDao = postsDao;
         this.userDao = userDao;
         this.emailService = emailService;
-
 
 
     }
@@ -82,7 +80,12 @@ public class PostController {
 
 
     public String newPost(@ModelAttribute Post post) {
-        post.setUser(userDao.findById(1L).get());
+//        post.setUser(userDao.findById(1L).get());
+//        postsDao.save(post);
+
+        User user = userDao.findById(1L).get();
+        post.setUser(user);
+        emailService.prepareAndSend(post, "New Post Created!", post.getBody());
         postsDao.save(post);
 
 
@@ -108,7 +111,7 @@ public class PostController {
 
     @PostMapping("/posts/{id}/edit")
 
-    public String submitEditPost(@ModelAttribute Post post){
+    public String submitEditPost(@ModelAttribute Post post) {
 
         post.setUser(userDao.findById(1L).get());
         postsDao.save(post);
@@ -120,16 +123,7 @@ public class PostController {
         return "redirect:/index";
 
 
-
-
-
-
-
-
-
     }
-
-
 
 
 }
